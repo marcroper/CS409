@@ -1,0 +1,55 @@
+package jpsa;
+
+
+import java.io.FileInputStream;
+
+import com.github.javaparser.JavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+
+
+
+public class SimpleUMLJPreln {
+
+    public static void main(String[] args) throws Exception {
+        FileInputStream in = new FileInputStream("ArrayStack.java");
+
+        CompilationUnit cu;
+        try {
+            cu = JavaParser.parse(in);
+        } finally {
+            in.close();
+        }
+
+        new ClassDiagramVisitor().visit(cu, null);
+    }
+
+    /**
+     * Simple visitor implementation for extracting class information 
+     */
+    private static class ClassDiagramVisitor extends VoidVisitorAdapter {
+    	
+    	public void visit(FieldDeclaration n, Object a){
+    		System.out.println("Field Type is: " + n.getType());
+    		for(VariableDeclarator v : n.getVariables()){
+    			System.out.println("Name: " + v.getId().getName());
+    		}
+    	}
+    	
+    	public void visit(VariableDeclarationExpr n, Object a){
+    		System.out.println("Var Type is: " + n.getType());
+    		for(VariableDeclarator v : n.getVars()){
+    			System.out.println("Name: " + v.getId().getName());
+    		}
+    	}
+    	
+//    	public void visit(VariableDeclarator v, Object a){
+//    		System.out.println("Name: " + v.getId().getName());
+//    	}
+    
+    }
+}
