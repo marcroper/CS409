@@ -33,7 +33,7 @@ public class SimpleUMLCandI {
     	public void visit(ClassOrInterfaceDeclaration n, Object arg){
     		System.out.println("Class Name: " + n.getName());
     		System.out.println("Class Implements: ");
-    		for (ClassOrInterfaceType coi : n.getImplements()) {
+    		for (ClassOrInterfaceType coi : n.getImplementedTypes()) {
             	System.out.println(coi.getName());
     		}
     		super.visit(n, arg);
