@@ -34,22 +34,22 @@ public class SimpleUMLJPreln {
     private static class ClassDiagramVisitor extends VoidVisitorAdapter {
     	
     	public void visit(FieldDeclaration n, Object a){
-    		System.out.println("Field Type is: " + n.getType());
+    		System.out.println("Field Type is: " + n.getElementType());
     		for(VariableDeclarator v : n.getVariables()){
-    			System.out.println("Name: " + v.getId().getName());
+    			System.out.println("Name: " + v.getName());
     		}
     	}
     	
     	public void visit(VariableDeclarationExpr n, Object a){
-    		System.out.println("Var Type is: " + n.getType());
-    		for(VariableDeclarator v : n.getVars()){
-    			System.out.println("Name: " + v.getId().getName());
+    		System.out.println("Var Type is: " + n.getElementType());
+    		for(VariableDeclarator v : n.getVariables()){
+    			System.out.println("Name: " + v.getName());
     		}
     	}
     	
-//    	public void visit(VariableDeclarator v, Object a){
-//    		System.out.println("Name: " + v.getId().getName());
-//    	}
+    	public void visit(VariableDeclarator v, Object a){
+    		System.out.println("Name: " + v.getName());
+    	}
     
     }
 }
