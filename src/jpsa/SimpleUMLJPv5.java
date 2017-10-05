@@ -13,7 +13,7 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 public class SimpleUMLJPv5 {
 
     public static void main(String[] args) throws Exception {
-        FileInputStream in = new FileInputStream("Somefile.java");
+        FileInputStream in = new FileInputStream("ArrayStack.java");
 
         CompilationUnit cu;
         try {
@@ -32,7 +32,14 @@ public class SimpleUMLJPv5 {
         @Override
         public void visit(MethodDeclaration n, Object arg) {
             System.out.println("Method name: " + n.getName());
-        	n.getBody().accept(this, arg); // process the body to pick up object creation
+         // process the body to pick up object creation
+         // was... but doesn't work
+//        	n.getBody().accept(this, arg); 
+            // Need tp handle Optional..
+//            n.getBody().ifPresent(n.getBody().accept(this, arg));
+            n.getBody().ifPresent(l -> l.accept(this, arg));
+//            n.getBody().get().accept(this, arg);
+
         }
         
         public void visit(ObjectCreationExpr p, Object arg) {

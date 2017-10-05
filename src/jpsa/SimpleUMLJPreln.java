@@ -47,9 +47,9 @@ public class SimpleUMLJPreln {
     		}
     	}
     	
-    	public void visit(VariableDeclarator v, Object a){
-    		System.out.println("Name: " + v.getName());
-    	}
+//    	public void visit(VariableDeclarator v, Object a){
+//    		System.out.println("Name: " + v.getName());
+//    	}
     
     }
 }

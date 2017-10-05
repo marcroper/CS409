@@ -22,7 +22,8 @@ public class SimpleJPmod {
 
     public static void main(String[] args) throws Exception {
         // FileInputStream in = new FileInputStream("C:\\Users\\aes02104\\workspace\\CS409TestCode\\src\\AKSTest.java");
-        FileInputStream in = new FileInputStream("/Users/aes02104/Documents/workspace/CS409TestCode/src/AKSTest.java");
+//        FileInputStream in = new FileInputStream("/Users/aes02104/Documents/workspace/CS409TestCode/src/AKSTest.java");
+        FileInputStream in = new FileInputStream("/home/s3/aes02104/git/CS409/CS409/src/testfiles/Cipher.java");
 
         CompilationUnit cu;
         try {
@@ -37,13 +38,16 @@ public class SimpleJPmod {
         // Write modified AST to a file
         byte[] modfile = cu.toString().getBytes();
         // Path file = Paths.get("C:\\Users\\aes02104\\workspace\\CS409TestCode\\src\\AKSTestMod.java");
-        Path file = Paths.get("/Users/aes02104/Documents/workspace/CS409TestCode/src/AKSTestMod.java");
+//        Path file = Paths.get("/Users/aes02104/Documents/workspace/CS409TestCode/src/AKSTestMod.java");
+        Path file = Paths.get("/home/s3/aes02104/git/CS409/CS409/src/testfiles/CipherMod.java");
         Files.write(file, modfile);
     }
 
     /**
      * Example of how to modify code and insert instrumentation
      * Just print out name of class after execution
+     * 
+     * Also need to modify the class name - easy to do and an exercise for the reader!
      */
     private static class MethodModVisitor extends VoidVisitorAdapter {
         @Override
@@ -55,7 +59,7 @@ public class SimpleJPmod {
             // MethodCallExpr call = new MethodCallExpr(NameExpr.name("System.out"), "println");
             MethodCallExpr call = new MethodCallExpr(new NameExpr("System.out"), "println");
             // Add in the argument - name of method visited
-            call.addArgument(new StringLiteralExpr(n.getName()));
+            call.addArgument(new StringLiteralExpr(n.getName().asString()));
 
             // Step 2 - Add this statement to the method
 //            n.getBody().addStatement(call);
@@ -63,7 +67,7 @@ public class SimpleJPmod {
             // Step 3 - Modify block
         	BlockStmt block = new BlockStmt();
         	block.addStatement(call);
-        	block.addStatement(n.getBody());
+        	block.addStatement(n.getBody().get());//n.getBody().get().accept(this, arg);
         	n.setBody(block);
         }        
     }

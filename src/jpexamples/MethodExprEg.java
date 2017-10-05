@@ -38,8 +38,8 @@ public class MethodExprEg {
         public void visit(MethodCallExpr n, Object arg) {
             // Details of methods
             System.out.println("Name "+n.getName());
-            System.out.println("Args "+n.getArgs());
-            System.out.println("Name Expr "+n.getNameExpr());
+            System.out.println("Args "+n.getArguments());
+            System.out.println("Name Expr "+n.asNameExpr());
             System.out.println("Scope "+n.getScope());
         }
         

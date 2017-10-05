@@ -12,7 +12,6 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 // import com.github.javaparser.ast.body.ModifierSet;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.body.VariableDeclarator;
-import com.github.javaparser.ast.body.VariableDeclaratorId;
 import com.github.javaparser.ast.expr.ClassExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
@@ -42,32 +41,25 @@ public class SimpleUMLJPv3 {
         @Override
         public void visit(MethodDeclaration n, Object arg) {
             System.out.println("Method name: " + n.getName());
-//            System.out.println("Method type: " + n.getType());
+            System.out.println("Method type: " + n.getType());
  //       	System.out.println("Method modifier: " + n.getModifiers() + " " + decodeModifiers(n.getModifiers()));
         	System.out.println("Method parameters: ");
         	for (Parameter p : n.getParameters()) {
             	System.out.println("Parameter type: " + p.getType());
-            	System.out.println("Parameter name: " + p.getId().getName());
+            	System.out.println("Parameter name: " + p.getName());
                 // p.accept(this, arg);
             }
 //        	n.getBody().accept(this, arg); // process rest of method body
         }
         
-        
-//        public void visit(Parameter p, Object arg) {
-//        	System.out.println("Parameter type: " + p.getType());
-//        	System.out.println("Parameter name: " + p.getId().getName());
-//        }
-        
         // What about constructor?
         public void visit(ConstructorDeclaration n, Object arg) {
             System.out.println("Constructor name: " + n.getName());
-//            System.out.println("Method type: " + n.getType());
  //       	System.out.println("Method modifier: " + n.getModifiers() + " " + decodeModifiers(n.getModifiers()));
         	System.out.println("Constructor parameters: ");
         	for (Parameter p : n.getParameters()) {
             	System.out.println("Parameter type: " + p.getType());
-            	System.out.println("Parameter name: " + p.getId().getName());
+            	System.out.println("Parameter name: " + p.getName());
                 // p.accept(this, arg);
             }
 //        	n.getBody().accept(this, arg); // process rest of method body
