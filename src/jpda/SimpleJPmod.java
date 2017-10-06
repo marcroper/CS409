@@ -62,12 +62,13 @@ public class SimpleJPmod {
             call.addArgument(new StringLiteralExpr(n.getName().asString()));
 
             // Step 2 - Add this statement to the method
-//            n.getBody().addStatement(call);
+            n.getBody().get().addStatement(call);
+//            n.getBody().ifPresent(l -> l.addStatement(call));
 
             // Step 3 - Modify block
         	BlockStmt block = new BlockStmt();
         	block.addStatement(call);
-        	block.addStatement(n.getBody().get());//n.getBody().get().accept(this, arg);
+        	block.addStatement(n.getBody().get());
         	n.setBody(block);
         }        
     }

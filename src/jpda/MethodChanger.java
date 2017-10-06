@@ -42,20 +42,9 @@ public class MethodChanger {
         	System.out.println("Name: " + n.getName());
             // change the name of the method
         	if (n.getName().asString().equals("putintotest")){
-        		
-//        		System.out.println("Found it");
-        		// n.setName(n.getName().toUpperCase());
         		n.setName("betterName");
-
-        		// create the new parameter
-        		//was Parameter newArg = ASTHelper.createParameter(ASTHelper.INT_TYPE, "value");
-        		// also was Parameter newArg = Parameter.create(PrimitiveType.INT_TYPE, "newparameter");
-        		// now
         		n.addParameter(PrimitiveType.intType(), "value");
 
-        		// add the parameter to the method
-        		// was ASTHelper.addParameter(n, newArg);
-        		// n.addParameter(newArg);
         	}
         }
     }
