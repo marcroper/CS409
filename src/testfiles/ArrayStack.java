@@ -1,5 +1,7 @@
 package testfiles;
 
+import java.util.Stack;
+
 /* 
  * An implementation of the Stack ADT using an array
  */
@@ -21,7 +23,7 @@ public class ArrayStack<E> implements Stack<E> {
 
 	public E pop() throws Stack.EmptyStackException {
 		if (!isEmpty()){
-			E example = new Object(); // put in to test
+			// E example = new Object(); // put in to test
 			E temp = store[top];
 			top--;
 			return temp;
