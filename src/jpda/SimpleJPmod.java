@@ -23,8 +23,8 @@ public class SimpleJPmod {
     public static void main(String[] args) throws Exception {
         // FileInputStream in = new FileInputStream("C:\\Users\\aes02104\\workspace\\CS409TestCode\\src\\AKSTest.java");
 //        FileInputStream in = new FileInputStream("/Users/aes02104/Documents/workspace/CS409TestCode/src/AKSTest.java");
-        FileInputStream in = new FileInputStream("/home/s3/aes02104/git/CS409/CS409/src/testfiles/Cipher.java");
-
+//        FileInputStream in = new FileInputStream("/home/s3/aes02104/git/CS409/CS409/src/testfiles/Cipher.java");
+        FileInputStream in = new FileInputStream("/Users/aes02104/IdeaProjects/CS409/src/testfiles/Cipher.java");
         CompilationUnit cu;
         try {
             cu = JavaParser.parse(in);
@@ -36,11 +36,11 @@ public class SimpleJPmod {
         System.out.println(cu.toString());
         
         // Write modified AST to a file
-        byte[] modfile = cu.toString().getBytes();
+//        byte[] modfile = cu.toString().getBytes();
         // Path file = Paths.get("C:\\Users\\aes02104\\workspace\\CS409TestCode\\src\\AKSTestMod.java");
 //        Path file = Paths.get("/Users/aes02104/Documents/workspace/CS409TestCode/src/AKSTestMod.java");
-        Path file = Paths.get("/home/s3/aes02104/git/CS409/CS409/src/testfiles/CipherMod.java");
-        Files.write(file, modfile);
+//        Path file = Paths.get("/home/s3/aes02104/git/CS409/CS409/src/testfiles/CipherMod.java");
+//        Files.write(file, modfile);
     }
 
     /**
@@ -59,17 +59,16 @@ public class SimpleJPmod {
             // MethodCallExpr call = new MethodCallExpr(NameExpr.name("System.out"), "println");
             MethodCallExpr call = new MethodCallExpr(new NameExpr("System.out"), "println");
             // Add in the argument - name of method visited
-            call.addArgument(new StringLiteralExpr(n.getName().asString()));
+            call.addArgument(new StringLiteralExpr(n.getNameAsString()));
 
             // Step 2 - Add this statement to the method
-            n.getBody().get().addStatement(call);
-//            n.getBody().ifPresent(l -> l.addStatement(call));
+            n.getBody().get().addStatement(0,call);
+//            n.getBody().ifPresent(l -> l.addStatement(0,call));
 
-            // Step 3 - Modify block
-        	BlockStmt block = new BlockStmt();
-        	block.addStatement(call);
-        	block.addStatement(n.getBody().get());
-        	n.setBody(block);
+            // More roundabout way...
+//            BlockStmt b = n.getBody().get();
+//            b.addStatement(0,call);
+//            n.setBody(b);
         }        
     }
 }
