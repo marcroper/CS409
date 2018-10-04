@@ -1,4 +1,4 @@
-package testfiles;
+//package testfiles;
 
 /* 
  * An implementation of the Stack ADT using an array
@@ -7,7 +7,9 @@ public class ArrayStack<E> extends Bob implements Stack<E> {
 	
 	private E store[]; // the object store in which we store the stack
 	private int top; // the index into the array of the top element, or -1 if stack is empty
-	
+	private int c,d;
+	private float e,fliuruiu,
+	g;
 	public ArrayStack(int capacity){
 		store = (E[]) new Object[capacity];
 		top = -1;

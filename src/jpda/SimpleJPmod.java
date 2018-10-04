@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
@@ -36,11 +37,12 @@ public class SimpleJPmod {
         System.out.println(cu.toString());
         
         // Write modified AST to a file
-//        byte[] modfile = cu.toString().getBytes();
+        byte[] modfile = cu.toString().getBytes();
         // Path file = Paths.get("C:\\Users\\aes02104\\workspace\\CS409TestCode\\src\\AKSTestMod.java");
 //        Path file = Paths.get("/Users/aes02104/Documents/workspace/CS409TestCode/src/AKSTestMod.java");
 //        Path file = Paths.get("/home/s3/aes02104/git/CS409/CS409/src/testfiles/CipherMod.java");
-//        Files.write(file, modfile);
+        Path file = Paths.get("/Users/aes02104/IdeaProjects/CS409/src/testfiles/CipherModified.java");
+        Files.write(file, modfile);
     }
 
     /**
@@ -50,6 +52,12 @@ public class SimpleJPmod {
      * Also need to modify the class name - easy to do and an exercise for the reader!
      */
     private static class MethodModVisitor extends VoidVisitorAdapter {
+        // Also change the name of the class
+        public void visit(ClassOrInterfaceDeclaration n, Object arg){
+            n.setName(n.getNameAsString()+"Modified");
+            super.visit(n,arg);
+        }
+
         @Override
         public void visit(MethodDeclaration n, Object arg) {
         	// Step 1 - create a new node

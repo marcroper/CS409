@@ -1,20 +1,22 @@
 package jpsa;
 
 
-import java.io.FileInputStream;
-
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
-import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 
 
-public class SimpleUMLJPreln {
+import java.io.FileInputStream;
+
+
+public class SimpleUMLJPCombined {
 
     public static void main(String[] args) throws Exception {
         FileInputStream in = new FileInputStream("ArrayStack.java");
@@ -30,7 +32,8 @@ public class SimpleUMLJPreln {
     }
 
     /**
-     * Simple visitor implementation for extracting class information 
+     * Simple visitor implementation for extracting class information
+     * along with fields and local variables
      */
     private static class ClassDiagramVisitor extends VoidVisitorAdapter {
 
@@ -40,7 +43,7 @@ public class SimpleUMLJPreln {
             for (ClassOrInterfaceType coi : n.getImplementedTypes()) {
                 System.out.println(coi.getName());
             }
-//            super.visit(n, arg);
+            super.visit(n, arg);
         }
 
     	public void visit(FieldDeclaration n, Object a){
@@ -49,17 +52,12 @@ public class SimpleUMLJPreln {
     			System.out.println("Name: " + v.getName());
     		}
     	}
-
+    	
     	public void visit(VariableDeclarationExpr n, Object a){
     		System.out.println("Var Type is: " + n.getElementType());
     		for(VariableDeclarator v : n.getVariables()){
     			System.out.println("Name: " + v.getName());
     		}
     	}
-    	
-    	public void visit(VariableDeclarator v, Object a){
-    		System.out.println("Name: " + v.getName());
-    	}
-    
     }
 }

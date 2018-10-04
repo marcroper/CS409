@@ -1,4 +1,4 @@
-package testfiles;
+package arrayStackTest;
 
 /* 
  * An implementation of the Stack ADT using an array

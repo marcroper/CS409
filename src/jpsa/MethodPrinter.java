@@ -36,8 +36,9 @@ public class MethodPrinter {
             // this method will be called for all methods in this 
             // CompilationUnit, including inner class methods
             System.out.println(n.getName()); // Just the name
-            System.out.println(n.getDeclarationAsString());  // The full signature
-            // Check the above change is properly committed
+            System.out.println(n.getType());
+//            System.out.println();
+//            System.out.println(n.getDeclarationAsString());  // The full signature
             super.visit(n, arg);
         }
     }
